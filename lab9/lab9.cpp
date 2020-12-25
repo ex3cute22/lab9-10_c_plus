@@ -208,10 +208,12 @@ public:
         return *this;
     }
     void showRate() {
+        //Защищенный блок
         try {
-            if (price <= 0) throw price;
+            if (price <= 0) throw price; //Инициализация исключения
             std::cout << year * 200 / price;
         }
+        //Перехват исключения
         catch (int price) {
             std::cout << "Цена автомобиля " << price << ", меньше или равно 0" << std::endl;
         }
