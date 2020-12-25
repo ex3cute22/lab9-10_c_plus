@@ -21,6 +21,7 @@ private:
     std::string* people; //владельцы
     int countPeople; //кол-во владельцев
 public:
+    //Конструктор без параметров
     car() {
         marka = " ";
         model = " ";
@@ -33,6 +34,7 @@ public:
         countPeople = 0;
         count++;
     }
+    //Конструктор с одним параметром
     car(std::string _marka) {
         marka = " ";
         marka = _marka;
@@ -46,6 +48,7 @@ public:
         countPeople = 0;
         count++;
     }
+    //Конструктор со всеми параметрами
     car(std::string _marka, std::string _model, float _engine, int _power, std::string _transmission, std::string _color, int _year, int _price, int _countPeople, std::string* _people) {
         marka = " ";
         model = " ";
@@ -60,6 +63,7 @@ public:
         year = _year;
         price = _price;
         countPeople = _countPeople;
+        //Динамический обьект
         people = new std::string[countPeople];
         for (int i = 0; i < countPeople; i++) {
             people[i] = _people[i];
@@ -82,12 +86,14 @@ public:
         year = a.year;
         price = a.price;
         countPeople = a.countPeople;
+        //Динамический обьект
         people = new std::string[countPeople];
         for (int i = 0; i < countPeople; i++) {
             people[i] = a.people[i];
         }
         count++;
     }
+    //Деструктор
     ~car() {
         car::RemoveItem();
     }
@@ -201,9 +207,16 @@ public:
         }
         return *this;
     }
+    void showRate() {
+        try {
+            if (price <= 0) throw price;
+            std::cout << year * 200 / price;
+        }
+        catch (int price) {
+            std::cout << "Цена автомобиля " << price << ", меньше или равно 0" << std::endl;
+        }
+    }
 };
-
-
 
 car& car::operator++() {
     power++;
@@ -236,29 +249,16 @@ int main()
 
     int balance = 0;
 
+    //Динамический обьект
     std::string people[2] = { "vova", "petya" };
+    //Обьект со всеми параметрами
     car toyota("toyota", "carib", 1.3, 83, "автомат", "зелёный", 1998, 100000, 2, people);
     toyota.Display();
+    //Обьект с одним параметром
     car bmw("bmw");
     bmw.Display();
+    //Обьект без параметров
     car nissan;
     nissan.Display();
-
-    //car toyota;
-    //toyota.Init("toyota", "carib", 1.3, 83, "автомат", "зелёный", 1998, 100000);
-    //car bmw;
-
-    ////Указатель
-    //int* power = toyota.getPower();
-    ///*(*power)++;*/
-    //toyota.Display();
-    ////Ссылка
-    //toyota.setPower(power) = 300;
-    //toyota++;
-    //++toyota;
-    //++toyota;
-    //toyota.Display();
-
-    //printf("Год: %d", getYear(toyota));
-
+    nissan.showRate();
 }
