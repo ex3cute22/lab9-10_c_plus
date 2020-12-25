@@ -72,27 +72,27 @@ public:
     }
 
     //Глубокий конструктор копирования
-    car(car& a) {
-        marka = " ";
-        model = " ";
-        marka = a.marka;
-        model = a.model;
-        engine = a.engine;
-        power = a.power;
-        transmission = " ";
-        color = " ";
-        transmission = a.transmission;
-        color = a.color;
-        year = a.year;
-        price = a.price;
-        countPeople = a.countPeople;
-        //Динамический обьект
-        people = new std::string[countPeople];
-        for (int i = 0; i < countPeople; i++) {
-            people[i] = a.people[i];
-        }
-        count++;
-    }
+    //car(car& a) {
+    //    marka = " ";
+    //    model = " ";
+    //    marka = a.marka;
+    //    model = a.model;
+    //    engine = a.engine;
+    //    power = a.power;
+    //    transmission = " ";
+    //    color = " ";
+    //    transmission = a.transmission;
+    //    color = a.color;
+    //    year = a.year;
+    //    price = a.price;
+    //    countPeople = a.countPeople;
+    //    //Динамический обьект
+    //    people = new std::string[countPeople];
+    //    for (int i = 0; i < countPeople; i++) {
+    //        people[i] = a.people[i];
+    //    }
+    //    count++;
+    //}
     //Деструктор
     ~car() {
         car::RemoveItem();
@@ -248,19 +248,51 @@ int main()
     SetConsoleOutputCP(1251);
     setlocale(LC_ALL, "Rus");
     system("color 70");
+    system("mode con cols=160 lines=65");
+
 
     int balance = 0;
 
     //Динамический обьект
     std::string people[2] = { "vova", "petya" };
-    //Обьект со всеми параметрами
-    car toyota("toyota", "carib", 1.3, 83, "автомат", "зелёный", 1998, 100000, 2, people);
-    toyota.Display();
-    //Обьект с одним параметром
-    car bmw("bmw");
-    bmw.Display();
-    //Обьект без параметров
-    car nissan;
-    nissan.Display();
-    nissan.showRate();
+
+    //Одномерный массив обьектов
+    car array[2]{
+        car("toyota", "carib", 1.3, 83, "автомат", "зелёный", 1998, 100000, 2, people),
+        car("bmw", "m5", 3.0, 300, "автомат", "золотой", 2015, 1000000, 2, people),
+    };
+
+    for (int i = 0; i < 2; i++) {
+        array[i].Display();
+    }
+
+    //Двумерный массив обьектов
+    car array2[2][2]{
+        {
+            car("toyota[0][0]", "carib", 1.3, 83, "автомат", "зелёный", 1998, 100000, 2, people),
+            car("toyota[0][1]", "carib", 1.5, 100, "автомат", "зелёный", 2000, 100000, 2, people),
+        },
+        {
+            car("bmw[1][0]", "m5", 3.0, 300, "автомат", "золотой", 2015, 1000000, 2, people),
+            car("bmw[1][1]", "m5", 3.2, 350, "автомат", "золотой", 2018, 1000000, 2, people),
+        }
+    };
+    
+    for (int i = 0; i < 2; i++) {
+        for (int j = 0; j < 2; j++) {
+            array2[i][j].Display();
+        }
+    }
+
+
+    ////Обьект со всеми параметрами
+    //car toyota("toyota", "carib", 1.3, 83, "автомат", "зелёный", 1998, 100000, 2, people);
+    //toyota.Display();
+    ////Обьект с одним параметром
+    //car bmw("bmw");
+    //bmw.Display();
+    ////Обьект без параметров
+    //car nissan;
+    //nissan.Display();
+    //nissan.showRate();
 }
